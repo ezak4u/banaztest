@@ -17,19 +17,15 @@ app.post('/bandyer', (req, res) => {
 	var headers  = req.headers;
 	var roomIdHmac  = req.headers["room-id-hmac"];
 	var bandyerSignature  = req.headers["bandyer-signature"];
-	const success = myCache.mset([
-		{key: "myKey1", val: bodyReq,  ttl: 60000},
-		{key: "myKey2", val: roomIdHmac, ttl: 60000},
-		{key: "myKey3", val: bandyerSignature, ttl: 60000},
-	]);
-	console.log("Request ...myCache status ==",JSON.stringify(success));
+	console.log("Request ...myCache status ==",JSON.stringify(bodyReq));
         console.log("Request ...Body = ",bodyReq);	
         console.log("Request ...roomIdHmac= ",roomIdHmac);
-	console.log("Request ...bandyerSignature= ",bandyerSignature);
-	setTimeout(function() {
-		console.log("Waiting......");	
-    }, 60*1000);
-	
+	console.log("Request ...bandyerSignature= ",bandyerSignature);	
+    res.send(retRes);	  
+});
+
+app.post('/', (req, res) => {
+    var retRes= {"Status" :"Ok"};   
     res.send(retRes);	  
 });
 app.listen(port, () => console.log('Running...Ezak..Application Now='+Date()))
